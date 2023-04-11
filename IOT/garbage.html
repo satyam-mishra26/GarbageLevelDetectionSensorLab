@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+
+<head>
+    <title>
+        Sensor Lab
+    </title>
+    <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css"
+        href="https://www.shieldui.com/shared/components/latest/css/light-bootstrap/all.min.css" />
+    <script type="text/javascript"
+        src="https://www.shieldui.com/shared/components/latest/js/shieldui-all.min.js"></script>
+    <script type="text/javascript" src="https://www.prepbootstrap.com/Content/js/gridData.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-database.js"></script>
+    <script>
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyCAjgz4E_MoB95TUrIFx0cwIklH5AC5d1c",
+            authDomain: "sensorlab-32dfe.firebaseapp.com",
+            databaseURL: "https://sensorlab-32dfe-default-rtdb.firebaseio.com",
+            projectId: "sensorlab-32dfe",
+            storageBucket: "sensorlab-32dfe.appspot.com",
+            messagingSenderId: "491529729745",
+            appId: "1:491529729745:web:f6814c539237adfb8a37f0",
+            measurementId: "G-546K27CR4F"
+        };
+        firebase.initializeApp(firebaseConfig);
+        var dbRef = firebase.database().ref().child("garbageLevels");
+        dbRef.on("value", function (snapshot) {
+            var sensor1Value = snapshot.child("sensor1").val();
+            var sensor2Value = snapshot.child("sensor2").val();
+            document.getElementById("sensor1-value").innerHTML = sensor1Value;
+            document.getElementById("sensor2-value").innerHTML = sensor2Value;
+            document.getElementById("trash1").style.height = sensor1Value + "px";
+            document.getElementById("trash2").style.height = sensor2Value + "px";
+        });
+    </script>
+
+    <style>
+        div {
+            padding-bottom: 20px;
+        }
+
+        .img1 {
+            filter: gray;
+            /* IE6-9 */
+            -webkit-filter: grayscale(1);
+            /* Google Chrome, Safari 6+ & Opera 15+ */
+            -webkit-box-shadow: 0px 2px 6px 2px rgba(0, 0, 0, 0.75);
+            -moz-box-shadow: 0px 2px 6px 2px rgba(0, 0, 0, 0.75);
+            box-shadow: 0px 2px 6px 2px rgba(0, 0, 0, 0.75);
+            margin-bottom: 20px;
+        }
+
+        .img1:hover {
+            filter: none;
+            /* IE6-9 */
+            -webkit-filter: grayscale(0);
+            /* Google Chrome, Safari 6+ & Opera 15+ */
+        }
+
+        .tabular {
+            -webkit-border-radius: 10px;
+            -moz-border-radius: 10px;
+        }
+
+        .intabular {
+            -webkit-border-radius: 10px;
+            -moz-border-radius: 10px;
+            background-color: White;
+        }
+
+        .button {
+            -webkit-border-radius: 10px;
+            -moz-border-radius: 10px;
+            background-color: White;
+            width: 130px;
+            height: 45px;
+            color: grey;
+        }
+
+        .header {
+            font-size: x-large;
+            font-family: 'Bell MT';
+            text-decoration: underline;
+            text-decoration-color: gray;
+            color: gray;
+        }
+
+        .label1 {
+            font-size: large;
+            font-family: 'Bell MT';
+            text-decoration-color: gray;
+            color: gray;
+        }
+
+        .txt {
+            -webkit-transition: all 0.30s ease-in-out;
+            -moz-transition: all 0.30s ease-in-out;
+            -o-transition: all 0.30s ease-in-out;
+            font-size: 19px;
+            font-family: Calibri;
+            padding: 8px 8px 8px 8px;
+            border: 1px solid #DDDDDD;
+        }
+
+        .txt:focus {
+            box-shadow: 0 0 5px #015987;
+            padding: 8px 8px 8px 8px;
+            border: 1px solid #015987;
+        }
+
+        #trash1 {
+            position: absolute;
+            bottom: 170px;
+            width: 265px;
+            height: 0;
+            margin-left: 165px;
+            background-color: #c8c6c6;
+            transition: height 0.5s;
+            border-bottom-left-radius: 28px;
+            border-bottom-right-radius: 28px;
+        }
+
+        #trash2 {
+            position: absolute;
+            bottom: 170px;
+            width: 265px;
+            height: 0;
+            margin-left: 165px;
+            background-color: #c8c6c6;
+            transition: height 0.5s;
+            border-bottom-left-radius: 28px;
+            border-bottom-right-radius: 28px;
+        }
+    </style>
+
+
+</head>
+
+<body>
+
+
+    <div id="wrapper" style="background-color:white">
+        <div class="container" style="background-color:white">
+
+            <div align="center" width="100%" style="background-color:white">
+
+                <table width="80%" align="center">
+                    <tr>
+                        <td align="center">
+                            <img id="ContentPlaceHolder1_Image1" src="images/lines.png" />
+                            <span id="ContentPlaceHolder1_Label1" style="font-family:Bodoni MT;font-size:X-Large;">IOT
+                                Smart Garbage Bin</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <br />
+                            &nbsp;
+                        </td>
+                    </tr>
+                </table>
+
+
+
+                <div id="ContentPlaceHolder1_UpdatePanel1">
+
+
+                    <span id="ContentPlaceHolder1_Timer1" style="visibility:hidden;display:none;"></span>
+                    <div id="ContentPlaceHolder1_Panel2">
+
+                        <div style="background-color: #3E3E3E; width: 80%; padding-bottom: 0px">
+                            <table width="100%" border="0">
+                                <tr>
+                                    <td colspan="2" align="center">
+                                        <span id="ContentPlaceHolder1_Label11"
+                                            style="color:White;font-family:Bodoni MT;font-size:X-Large;">1st Garbage
+                                            Bin</span>
+                                    </td>
+                                    <td colspan="2" align="center">
+                                        <span id="ContentPlaceHolder1_Label12"
+                                            style="color:White;font-family:Bodoni MT;font-size:X-Large;">2nd Garbage
+                                            Bin</span>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <table width="80%" align="center">
+                            <tr>
+                                <td colspan="6">&nbsp;<br />
+                                    &nbsp;<br />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" align="center">
+                                    <img id="ContentPlaceHolder1_Bin1" src="images/bins/0.jpg" style="width:50%;" />
+                                    <div id="trash1"></div>
+                                </td>
+                                <td colspan="2" align="center">
+                                    <img id="ContentPlaceHolder1_Bin2" src="images/bins/0.jpg" style="width:50%;" />
+                                    <div id="trash2"></div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" align="center">
+                                    <h3>GarbageLevel: <span id="sensor1-value"></span> cm</h3>
+                                </td>
+                                <td colspan="2" align="center">
+                                  <h3>  GarbageLevel: <span id="sensor2-value"></span> cm </h3>
+                                </td>
+                            </tr>
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</body>
+
+</html>
